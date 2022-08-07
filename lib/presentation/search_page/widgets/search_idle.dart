@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:netflix_clone/application/search/search_bloc.dart';
 import 'package:netflix_clone/core/colors.dart';
+import 'package:netflix_clone/core/const_uri.dart';
 import 'package:netflix_clone/core/contant.dart';
 import 'package:netflix_clone/presentation/search_page/widgets/title.dart';
 
@@ -13,18 +16,42 @@ class SearchIdleWidget extends StatelessWidget {
       const MainTitle(tittle: 'Top Searches'),
       kheight,
       Expanded(
-        child: ListView.separated(
-            shrinkWrap: true,
-            itemBuilder: ((context, index) => const TopSearchItems()),
-            separatorBuilder: (context, index) => kheight20,
-            itemCount: 10),
+        child: BlocBuilder<SearchBloc, SearchState>(
+          builder: (context, state) {
+            if (state.isLoading) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            } else if (state.isError) {
+              return const Center(
+                child: Text('Full Error'),
+              );
+            } else if (state.idleList.isEmpty) {
+              return const Center(
+                child: Text('List Empty'),
+              );
+            }
+            return ListView.separated(
+                shrinkWrap: true,
+                itemBuilder: ((context, index) {
+              final movie =    state.idleList[index];
+               return TopSearchItems(imageUrl: '$imageAppendUrl${movie.posterPath}', title: movie.title?? 'No title');
+                }),
+                separatorBuilder: (context, index) => kheight20,
+                itemCount: state.idleList.length);
+          },
+        ),
       )
     ]);
   }
 }
 
 class TopSearchItems extends StatelessWidget {
-  const TopSearchItems({Key? key}) : super(key: key);
+  final String title;
+  final String imageUrl;
+
+  const TopSearchItems({Key? key, required this.imageUrl, required this.title})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -35,29 +62,28 @@ class TopSearchItems extends StatelessWidget {
         Container(
           width: imageSize.width * 0.35,
           height: 65,
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
               image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: NetworkImage(
-                      "https://www.nowrunning.com/content/movie/2020/kaduv-24597/Stills/kaduva5_2022620.jpg"))),
+                  fit: BoxFit.cover, image: NetworkImage(imageUrl))),
         ),
         kwidth,
-        const Expanded(
+        Expanded(
           child: Text(
-            'MovieName',
-            style: TextStyle(
+            title,
+            style: const TextStyle(
                 fontSize: 16, fontWeight: FontWeight.bold, color: kwhite),
           ),
         ),
         const CircleAvatar(
-          radius: 25,
+          radius: 18,
           backgroundColor: kwhite,
           child: CircleAvatar(
-            radius: 22,
+            radius: 16,
             backgroundColor: backgroundColor,
             child: Icon(
               CupertinoIcons.play_fill,
               color: kwhite,
+              size: 15,
             ),
           ),
         ),

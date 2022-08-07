@@ -105,7 +105,7 @@ class HomeScreen extends StatelessWidget {
                       ),
                       scrollNotifier.value == true
                           ? AnimatedContainer(
-                            duration: const Duration(milliseconds: 1000),
+                              duration: const Duration(milliseconds: 1000),
                               height: 90,
                               width: double.infinity,
                               color: Colors.black.withOpacity(0.3),
@@ -196,7 +196,12 @@ class TextButtonWidget extends StatelessWidget {
 }
 
 class CostumButton extends StatelessWidget {
-  const CostumButton({Key? key, required this.icon, required this.title,this.iconSize = 30, this.textSize =18})
+  const CostumButton(
+      {Key? key,
+      required this.icon,
+      required this.title,
+      this.iconSize = 30,
+      this.textSize = 18})
       : super(key: key);
   final IconData icon;
   final String title;
@@ -214,7 +219,7 @@ class CostumButton extends StatelessWidget {
         ),
         Text(
           title,
-          style:  TextStyle(fontSize: textSize),
+          style: TextStyle(fontSize: textSize),
         )
       ],
     );

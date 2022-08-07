@@ -13,7 +13,7 @@ class MainPageList extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-           MainTitle(tittle: title),
+          MainTitle(tittle: title),
           LimitedBox(
             maxHeight: 180,
             child: ListView(

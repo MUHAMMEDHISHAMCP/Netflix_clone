@@ -2,18 +2,18 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:netflix_clone/application/download/downloads_bloc.dart';
 import 'package:netflix_clone/core/colors.dart';
 import 'package:netflix_clone/core/const_uri.dart';
 import 'package:netflix_clone/core/contant.dart';
 import 'package:netflix_clone/presentation/widgets/costune_appbar.dart';
 
-import '../../application/bloc/downloads_bloc.dart';
 
 class DownloadScreen extends StatelessWidget {
   DownloadScreen({Key? key}) : super(key: key);
   final _widgetList = [
     const _SmartDownloads(),
-    Section2(),
+    const Section2(),
     const Section3(),
   ];
   @override
@@ -37,7 +37,7 @@ class DownloadScreen extends StatelessWidget {
 }
 
 class Section2 extends StatelessWidget {
-  Section2({Key? key}) : super(key: key);
+  const Section2({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +56,7 @@ class Section2 extends StatelessWidget {
         ),
         kheight,
         const Text(
-          "We will download a personalised selection of \n movies and shows  for you so there's \n always something to watch on your \n device",
+          "We will download a personalised selection of  movies and shows  for you so there's \n always something to watch on your \n device",
           style: TextStyle(fontSize: 16, color: Colors.grey),
           textAlign: TextAlign.center,
         ),
@@ -193,20 +193,14 @@ class DownloadImageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final Size size = MediaQuery.of(context).size;
-
     return Transform.rotate(
       angle: angle * pi / 180,
       child: Container(
         margin: margin,
-        // width: size.width * 0.36,
-        // height: size.width *0.56,
         width: size.width,
         height: size.height,
-
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
-            // color: backgroundColor,
             image: DecorationImage(
               fit: BoxFit.cover,
               image: NetworkImage(imageList),

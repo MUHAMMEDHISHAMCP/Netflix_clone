@@ -1,9 +1,8 @@
-
 import 'package:bordered_text/bordered_text.dart';
 import 'package:flutter/material.dart';
 
 class NumberCard extends StatelessWidget {
-  const NumberCard({Key? key,required this.index}) : super(key: key);
+  const NumberCard({Key? key, required this.index}) : super(key: key);
   final int index;
 
   @override
@@ -33,9 +32,16 @@ class NumberCard extends StatelessWidget {
           bottom: 0,
           left: 17,
           child: BorderedText(
-            strokeWidth: 6.0,
-            strokeColor: Colors.white,
-            child: Text('${index +1}' , style: const TextStyle(decoration: TextDecoration.none,color: Colors.black ,fontSize: 110,fontWeight: FontWeight.w900),)),
+              strokeWidth: 6.0,
+              strokeColor: Colors.white,
+              child: Text(
+                '${index + 1}',
+                style: const TextStyle(
+                    decoration: TextDecoration.none,
+                    color: Colors.black,
+                    fontSize: 110,
+                    fontWeight: FontWeight.w900),
+              )),
         ),
       ],
     );
