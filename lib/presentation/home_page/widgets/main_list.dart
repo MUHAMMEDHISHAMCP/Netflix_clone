@@ -4,7 +4,8 @@ import 'package:netflix_clone/presentation/widgets/main_card.dart';
 
 class MainPageList extends StatelessWidget {
   final String title;
-  const MainPageList({Key? key, required this.title}) : super(key: key);
+  final List<String> posterPath;
+  const MainPageList({Key? key, required this.title, required this.posterPath}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +19,7 @@ class MainPageList extends StatelessWidget {
             maxHeight: 180,
             child: ListView(
               scrollDirection: Axis.horizontal,
-              children: List.generate(10, (index) => const MainCard()),
+              children: List.generate(posterPath.length, (index) =>  MainCard(imageUrl: posterPath[index],)),
             ),
           )
         ],

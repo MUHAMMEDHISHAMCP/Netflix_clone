@@ -34,8 +34,10 @@ class SearchIdleWidget extends StatelessWidget {
             return ListView.separated(
                 shrinkWrap: true,
                 itemBuilder: ((context, index) {
-              final movie =    state.idleList[index];
-               return TopSearchItems(imageUrl: '$imageAppendUrl${movie.posterPath}', title: movie.title?? 'No title');
+                  final movie = state.idleList[index];
+                  return TopSearchItems(
+                      imageUrl: '$imageAppendUrl${movie.posterPath}',
+                      title: movie.title ?? 'No title');
                 }),
                 separatorBuilder: (context, index) => kheight20,
                 itemCount: state.idleList.length);

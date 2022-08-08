@@ -9,8 +9,8 @@ import 'package:netflix_clone/domain/search/model/search_response/search_respons
 
 part 'search_event.dart';
 part 'search_state.dart';
-  part 'search_bloc.freezed.dart';
-  
+part 'search_bloc.freezed.dart';
+
 @injectable
 class SearchBloc extends Bloc<SearchEvent, SearchState> {
   final IDownloadsRepo _downloadService;
@@ -51,7 +51,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
       );
       emit(states);
     });
-
+ 
     on<searchMovies>(
       (event, emit) async {
         emit(SearchState(

@@ -8,7 +8,6 @@ import 'package:netflix_clone/core/const_uri.dart';
 import 'package:netflix_clone/core/contant.dart';
 import 'package:netflix_clone/presentation/widgets/costune_appbar.dart';
 
-
 class DownloadScreen extends StatelessWidget {
   DownloadScreen({Key? key}) : super(key: key);
   final _widgetList = [

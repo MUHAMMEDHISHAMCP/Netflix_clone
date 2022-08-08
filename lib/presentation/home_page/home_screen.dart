@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:netflix_clone/application/home/home_bloc.dart';
 import 'package:netflix_clone/core/colors.dart';
+import 'package:netflix_clone/core/const_uri.dart';
 import 'package:netflix_clone/core/contant.dart';
 import 'package:netflix_clone/presentation/home_page/widgets/numder_card.dart';
 import 'package:netflix_clone/presentation/search_page/widgets/title.dart';
@@ -14,6 +17,9 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      BlocProvider.of<HomeBloc>(context).add(const GetHomeScreenData());
+    });
     return Scaffold(
       body: SafeArea(
           child: ValueListenableBuilder(
@@ -31,77 +37,130 @@ class HomeScreen extends StatelessWidget {
                   },
                   child: Stack(
                     children: [
-                      ListView(
-                        children: [
-                          Stack(
+                      BlocBuilder<HomeBloc, HomeState>(
+                        builder: (context, state) {
+                          if (state.isLoading) {
+                            return const Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          } else if (state.isError) {
+                            return const Center(
+                              child: Text('Not get data'),
+                            );
+                          }
+
+                          final releasedPastYear = state.pastYear.map((p) {
+                            return '$imageAppendUrl${p.posterPath}';
+                          }).toList();
+
+                          // trending
+                          final trending = state.trending.map((t) {
+                            return '$imageAppendUrl${t.posterPath}';
+                          }).toList();
+
+                          // dramas
+                          final dramas = state.trending.map((d) {
+                            return '$imageAppendUrl${d.posterPath}';
+                          }).toList();
+
+                          // southIndian
+                          final southIndian = state.trending.map((s) {
+                            return '$imageAppendUrl${s.posterPath}';
+                          }).toList();
+
+                           // toptvshows
+                          final topTvShows = state.topTvShows.map((t) {
+                            return '$imageAppendUrl${t.posterPath}';
+                          }).toList();
+
+                          releasedPastYear.shuffle();
+                          dramas.shuffle();
+                          southIndian.shuffle();
+
+                          return ListView(
                             children: [
-                              Container(
-                                height:
-                                    MediaQuery.of(context).size.height / 1.7,
-                                width: double.infinity,
-                                decoration: const BoxDecoration(
-                                    image: DecorationImage(
-                                        fit: BoxFit.fill,
-                                        image: NetworkImage(
-                                            "https://m.media-amazon.com/images/M/MV5BMjllYTdiYmItZWYzYy00MDBlLWJjMDAtZjNlMzdkZjk1Mjc3XkEyXkFqcGdeQXVyMjkxNzQ1NDI@._V1_.jpg"))),
-                              ),
-                              Positioned(
-                                bottom: 0,
-                                left: 0,
-                                right: 0,
-                                child: Padding(
-                                  padding: const EdgeInsets.only(bottom: 10),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: const [
-                                      CostumButton(
-                                        icon: Icons.add,
-                                        title: 'My List',
-                                      ),
-                                      TextButtonWidget(),
-                                      CostumButton(
-                                          icon: Icons.info_outline,
-                                          title: 'Info')
-                                    ],
+                              Stack(
+                                children: [
+                                  Container(
+                                    height: MediaQuery.of(context).size.height /
+                                        1.5,
+                                    width: double.infinity,
+                                    decoration: const BoxDecoration(
+                                        image: DecorationImage(
+                                            fit: BoxFit.fill,
+                                            image: NetworkImage(
+                                                "https://m.media-amazon.com/images/M/MV5BMjllYTdiYmItZWYzYy00MDBlLWJjMDAtZjNlMzdkZjk1Mjc3XkEyXkFqcGdeQXVyMjkxNzQ1NDI@._V1_.jpg"))),
                                   ),
-                                ),
-                              )
-                            ],
-                          ),
-                          kheight,
-                          const MainPageList(
-                            title: 'Released in the Past Year',
-                          ),
-                          kheight,
-                          const MainPageList(
-                            title: 'Trending Now',
-                          ),
-                          kheight,
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const MainTitle(
-                                  tittle: 'Top 10 Tv Shows In India Today'),
+                                  Positioned(
+                                    bottom: 0,
+                                    left: 0,
+                                    right: 0,
+                                    child: Padding(
+                                      padding:
+                                          const EdgeInsets.only(bottom: 10),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        children: const [
+                                          CostumButton(
+                                            icon: Icons.add,
+                                            title: 'My List',
+                                          ),
+                                          TextButtonWidget(),
+                                          CostumButton(
+                                              icon: Icons.info_outline,
+                                              title: 'Info')
+                                        ],
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
                               kheight,
-                              LimitedBox(
-                                maxHeight: 180,
-                                child: ListView(
-                                  scrollDirection: Axis.horizontal,
-                                  children: List.generate(
-                                      10,
-                                      (index) => NumberCard(
-                                            index: index,
-                                          )),
-                                ),
+                              MainPageList(
+                                title: 'Released in the Past Year',
+                                posterPath: releasedPastYear,
+                              ),
+                              kheight,
+                              MainPageList(
+                                title: 'Trending Now',
+                                posterPath: trending,
+                              ),
+                              kheight,
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const MainTitle(
+                                      tittle: 'Top 10 Tv Shows In India Today'),
+                                  kheight,
+                                  LimitedBox(
+                                    maxHeight: 180,
+                                    child: ListView(
+                                      scrollDirection: Axis.horizontal,
+                                      children: List.generate(
+                                          state.topTvShows.length,
+                                          (index) => NumberCard(
+                                                index: index,
+                                                imageUrl:  topTvShows,
+                                                
+                                              )),
+                                    ),
+                                  )
+                                ],
+                              ),
+                              kheight,
+                              MainPageList(
+                                title: 'Tense Dramas',
+                                posterPath: dramas,
+                              ),
+                              kheight,
+                              MainPageList(
+                                title: 'South Indian Cinema',
+                                posterPath: southIndian,
                               )
                             ],
-                          ),
-                          kheight,
-                          const MainPageList(title: 'Tense Dramas'),
-                          kheight,
-                          const MainPageList(title: 'South Indian Cinema')
-                        ],
+                          );
+                        },
                       ),
                       scrollNotifier.value == true
                           ? AnimatedContainer(

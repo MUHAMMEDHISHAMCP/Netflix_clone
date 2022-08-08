@@ -1,21 +1,32 @@
 import 'package:flutter/material.dart';
 
 class VideoWidget extends StatelessWidget {
-  const VideoWidget({
-    Key? key,
-  }) : super(key: key);
+  final String? imageUrl;
+  const VideoWidget({Key? key, required this.imageUrl}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        const SizedBox(
+        SizedBox(
           width: double.infinity,
           height: 200,
           child: Image(
-            image: NetworkImage(
-                "https://www.nowrunning.com/content/movie/2020/kaduv-24597/Stills/kaduva5_2022620.jpg"),
+            image: NetworkImage('$imageUrl'),
             fit: BoxFit.cover,
+            loadingBuilder:
+                (BuildContext _, Widget child, ImageChunkEvent? progress) {
+              if (progress == null) {
+                return child;
+              } else {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+            },
+            errorBuilder: (BuildContext a, Object _, StackTrace? trace) {
+              return const Center(child: Icon(Icons.wifi));
+            },
           ),
         ),
         Positioned(

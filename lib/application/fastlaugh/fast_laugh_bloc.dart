@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -23,15 +25,14 @@ class FastLaughBloc extends Bloc<FastLaughEvent, FastLaughState> {
   ) : super(FastLaughState.initial()) {
     on<initialize>(
       (event, emit) async {
-        emit(const FastLaughState(
+       emit(const FastLaughState(
           videoList: [],
           isLoading: true,
           isError: false,
         ));
-       
 
         final result = await downloadService.getDownloadsImage();
-        final states =  result.fold(
+        final states = result.fold(
           (l) {
             const FastLaughState(
               videoList: [],
@@ -39,14 +40,16 @@ class FastLaughBloc extends Bloc<FastLaughEvent, FastLaughState> {
               isError: true,
             );
           },
-          (resp) {
+          (r) {
             FastLaughState(
-              videoList: resp,
+              videoList: r,
               isLoading: false,
               isError: false,
             );
+            log(r.toString());
           },
         );
+        // log(states.toString());
 
         emit(states);
       },

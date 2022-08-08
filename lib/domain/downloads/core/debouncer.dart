@@ -15,4 +15,3 @@ class Debouncer {
     timer = Timer(Duration(milliseconds: millseconds), action);
   }
 }
-  

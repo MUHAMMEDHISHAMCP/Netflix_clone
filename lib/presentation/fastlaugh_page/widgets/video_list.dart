@@ -62,7 +62,8 @@ class VideoList extends StatelessWidget {
                         radius: 30,
                       ),
                     ),
-                    const VideoActions(icon: Icons.emoji_emotions, title: 'LOL'),
+                    const VideoActions(
+                        icon: Icons.emoji_emotions, title: 'LOL'),
                     const VideoActions(icon: Icons.add, title: 'My List'),
                     const VideoActions(icon: Icons.share, title: 'Share'),
                     const VideoActions(icon: Icons.play_arrow, title: 'Play')

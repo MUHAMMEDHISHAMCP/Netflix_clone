@@ -12,3 +12,6 @@ const kheight20 = SizedBox(
 const kheight40 = SizedBox(
   height: 40,
 );
+
+
+//  '$imageAppendUrl${state.trending[0].posterPath}'

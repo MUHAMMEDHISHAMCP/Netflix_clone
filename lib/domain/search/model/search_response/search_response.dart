@@ -4,7 +4,6 @@ part 'search_response.g.dart';
 
 @JsonSerializable()
 class SearchResponse {
-
   @JsonKey(name: 'results')
   List<SearchResultData> results;
 
@@ -21,7 +20,6 @@ class SearchResponse {
 
 @JsonSerializable()
 class SearchResultData {
-
   @JsonKey(name: 'id')
   int? id;
 

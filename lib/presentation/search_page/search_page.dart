@@ -10,8 +10,8 @@ import 'package:netflix_clone/presentation/search_page/widgets/search_result.dar
 class SearchScreen extends StatelessWidget {
   SearchScreen({Key? key}) : super(key: key);
 
-  final debouncer = Debouncer(millseconds: 1*1000);
-
+  final debouncer = Debouncer(millseconds: 1 * 1000);
+ 
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback((_) {

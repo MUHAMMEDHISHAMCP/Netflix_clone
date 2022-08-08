@@ -26,7 +26,9 @@ class SearchResultScreen extends StatelessWidget {
                 mainAxisSpacing: 8,
                 children: List.generate(20, (index) {
                   final movie = state.searchResultList[index];
-                  return  MainShowCard(imageUrl:'$imageAppendUrl${ movie.posterPath}',);
+                  return MainShowCard(
+                    imageUrl: '$imageAppendUrl${movie.posterPath}',
+                  );
                 }));
           },
         ))

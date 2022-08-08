@@ -26,7 +26,10 @@ class FastLaughScreen extends StatelessWidget {
             return PageView(
               scrollDirection: Axis.vertical,
               children: List.generate(state.videoList.length, (index) {
-               return VideoListInherit(movieData:state.videoList[index] , widget: VideoList(key: Key(index.toString()) ,index: index) );
+                return VideoListInherit(
+                    movieData: state.videoList[index],
+                    widget:
+                        VideoList(key: Key(index.toString()), index: index));
               }),
             );
           }
