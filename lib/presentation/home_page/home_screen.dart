@@ -68,7 +68,7 @@ class HomeScreen extends StatelessWidget {
                             return '$imageAppendUrl${s.posterPath}';
                           }).toList();
 
-                           // toptvshows
+                          // toptvshows
                           final topTvShows = state.topTvShows.map((t) {
                             return '$imageAppendUrl${t.posterPath}';
                           }).toList();
@@ -89,7 +89,7 @@ class HomeScreen extends StatelessWidget {
                                         image: DecorationImage(
                                             fit: BoxFit.fill,
                                             image: NetworkImage(
-                                                "https://m.media-amazon.com/images/M/MV5BMjllYTdiYmItZWYzYy00MDBlLWJjMDAtZjNlMzdkZjk1Mjc3XkEyXkFqcGdeQXVyMjkxNzQ1NDI@._V1_.jpg"))),
+                                                "https://m.media-amazon.com/images/M/MV5BOGE4NzU1YTAtNzA3Mi00ZTA2LTg2YmYtMDJmMThiMjlkYjg2XkEyXkFqcGdeQXVyNTgzMDMzMTg@._V1_.jpg"))),
                                   ),
                                   Positioned(
                                     bottom: 0,
@@ -141,8 +141,7 @@ class HomeScreen extends StatelessWidget {
                                           state.topTvShows.length,
                                           (index) => NumberCard(
                                                 index: index,
-                                                imageUrl:  topTvShows,
-                                                
+                                                imageUrl: topTvShows,
                                               )),
                                     ),
                                   )

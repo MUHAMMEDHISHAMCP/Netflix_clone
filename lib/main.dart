@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (ctx) => getIt<SearchBloc>()),
         BlocProvider(create: (ctx) => getIt<FastLaughBloc>()),
         BlocProvider(create: (ctx) => getIt<HotAndNewBloc>()),
-         BlocProvider(create: (ctx) => getIt<HomeBloc>()),
+        BlocProvider(create: (ctx) => getIt<HomeBloc>()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
