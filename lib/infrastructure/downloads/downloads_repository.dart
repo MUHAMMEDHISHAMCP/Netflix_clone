@@ -21,7 +21,7 @@ class DownloadRepository implements IDownloadsRepo {
       } else {
         return const Left(MainFailures.serverFailure());
       }
-    } catch (_) {
+    } catch (e) {
       return const Left(MainFailures.clientFailure());
     }
   }

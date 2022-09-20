@@ -10,10 +10,9 @@ import 'package:netflix_clone/domain/hot_and_new/i_hotandnew_repo.dart';
 class HotAndNewImplementation implements HotAndNewService {
   @override
   Future<Either<MainFailures, HotAndNew>> getHotAndNewMovieData() async {
-        try {
+    try {
       final Response response = await Dio(BaseOptions()).get(
         ApiEndPoint.hotAndNewMovie,
-       
       );
       if (response.statusCode == 200 || response.statusCode == 201) {
         final result = HotAndNew.fromJson(response.data);
@@ -28,10 +27,9 @@ class HotAndNewImplementation implements HotAndNewService {
 
   @override
   Future<Either<MainFailures, HotAndNew>> getHotAndNewTvData() async {
-     try {
+    try {
       final Response response = await Dio(BaseOptions()).get(
         ApiEndPoint.hotAndNewTv,
-        
       );
       if (response.statusCode == 200 || response.statusCode == 201) {
         final result = HotAndNew.fromJson(response.data);
@@ -43,5 +41,4 @@ class HotAndNewImplementation implements HotAndNewService {
       return const Left(MainFailures.clientFailure());
     }
   }
-
 }

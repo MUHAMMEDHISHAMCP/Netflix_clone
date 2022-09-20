@@ -17,7 +17,6 @@ class HotAndNew {
     return _$HotAndNewFromJson(json);
   }
 
-  Map<String, dynamic> toJson() => _$HotAndNewToJson(this);
 }
 
 @JsonSerializable()
@@ -70,6 +69,5 @@ class HotAndNewData {
     return _$HotAndNewDataFromJson(json);
   }
 
-  Map<String, dynamic> toJson() => _$HotAndNewDataToJson(this);
 }
 

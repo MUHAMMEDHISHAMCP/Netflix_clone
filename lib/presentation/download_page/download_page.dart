@@ -68,43 +68,44 @@ class Section2 extends StatelessWidget {
               color: Colors.transparent,
               child: state.isLoading
                   ? const Center(child: CircularProgressIndicator())
-                  : Stack(
-                      alignment: AlignmentDirectional.center,
-                      children: [
-                        CircleAvatar(
-                            radius: size.width * 0.35,
-                            backgroundColor: Colors.grey.withOpacity(0.5)),
-                        DownloadImageWidget(
-                          margin: const EdgeInsets.only(left: 130, bottom: 50),
-                          angle: 20,
-                          imageList:
-                              '$imageAppendUrl${state.downloads[0].posterPath}',
-                          size: Size(
-                            size.width * 0.36,
-                            size.width * 0.52,
-                          ),
+                  : state.downloads.isEmpty
+                      ? const Center(child: CircularProgressIndicator(strokeWidth: 2,))
+                      : Stack(
+                          alignment: AlignmentDirectional.center,
+                          children: [
+                            CircleAvatar(
+                                radius: size.width * 0.35,
+                                backgroundColor: Colors.grey.withOpacity(0.5)),
+                            DownloadImageWidget(
+                              margin:
+                                  const EdgeInsets.only(left: 130, bottom: 50),
+                              angle: 20,
+                              imageList: '$imageAppendUrl${state.downloads[0].posterPath}',
+                              size: Size(
+                                size.width * 0.36,
+                                size.width * 0.52,
+                              ),
+                            ),
+                            DownloadImageWidget(
+                              margin:
+                                  const EdgeInsets.only(right: 130, bottom: 50),
+                              angle: -20,
+                              imageList: '$imageAppendUrl${state.downloads[1].posterPath}',
+                              size: Size(
+                                size.width * 0.38,
+                                size.width * 0.52,
+                              ),
+                            ),
+                            DownloadImageWidget(
+                              margin: const EdgeInsets.only(bottom: 15),
+                              imageList: '$imageAppendUrl${state.downloads[2].posterPath}',
+                              size: Size(
+                                size.width * 0.36,
+                                size.width * 0.58,
+                              ),
+                            )
+                          ],
                         ),
-                        DownloadImageWidget(
-                          margin: const EdgeInsets.only(right: 130, bottom: 50),
-                          angle: -20,
-                          imageList:
-                              '$imageAppendUrl${state.downloads[1].posterPath}',
-                          size: Size(
-                            size.width * 0.38,
-                            size.width * 0.52,
-                          ),
-                        ),
-                        DownloadImageWidget(
-                          margin: const EdgeInsets.only(bottom: 15),
-                          imageList:
-                              '$imageAppendUrl${state.downloads[2].posterPath}',
-                          size: Size(
-                            size.width * 0.36,
-                            size.width * 0.58,
-                          ),
-                        )
-                      ],
-                    ),
             );
           },
         ),
